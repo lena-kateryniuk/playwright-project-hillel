@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../src/pages/login-page';
-
+import { goto } from '../src/pages/navigatable';
 
 test.describe('Login Page Tests', () => {
   let loginPage: LoginPage;
@@ -10,9 +10,8 @@ test.describe('Login Page Tests', () => {
   })
   
   test('All elements om the Page', async ({ page }) => {
-    await test.step('Go to Login Page', async () => {
-      await page.goto('/login')
-    })
+    
+    await goto(loginPage)
     await expect(page.locator('text=Welcome to Omni-dispatch TMS')).toBeVisible();
     await expect(page.locator('text=Log in to your account')).toBeVisible();
     await expect(loginPage.emeilField).toBeVisible();
