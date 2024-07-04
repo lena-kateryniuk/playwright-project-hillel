@@ -1,6 +1,6 @@
-import { Base } from './base';
-import { Navigatable } from './navigatable';
-import { goto } from './navigatable';
+import { Base } from '../base';
+import { Navigatable } from '../navigatable';
+import { goto } from '../navigatable';
 
 export class LoginPage extends Base implements Navigatable {
     readonly emeilField = this.getByType('email');
