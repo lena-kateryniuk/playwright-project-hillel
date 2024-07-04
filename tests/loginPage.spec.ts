@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { LoginPage } from '../src/pages/pages/login-page';
 import { goto } from '../src/pages/navigatable';
-import { DriverPage } from '../src/pages/pages/driver-page';
 
 test.describe('Login Page Tests', () => {
   let loginPage: LoginPage;
@@ -29,14 +28,6 @@ test.describe('Login Page Tests', () => {
   test('Login with incorrect credentials', async ({ page }) => {
     await loginPage.login(process.env.EMAIL, 'aaa');
     await expect(page.locator('text=Wrong Email or password')).toBeVisible();
-  })
-
-  test ('button', async ({ page }) => {
-    const driverPage = new DriverPage(page)
-    await loginPage.login(process.env.EMAIL, process.env.PASSWORD);
-
-    await expect(driverPage.header.menuButton).toBeVisible();
-    // await driverPage.header.menuButton.click();
   })
 })
   

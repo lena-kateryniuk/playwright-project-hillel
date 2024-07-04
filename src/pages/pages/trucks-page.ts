@@ -6,7 +6,5 @@ export class TruckPage extends BaseViewPage implements Navigatable {
         return '/fleets/trucks'
     }
     
-    async waitForLoadState(): Promise<void> {
-        
-    }
+    async waitForLoadState(): Promise<void> {}
 }

@@ -7,8 +7,5 @@ export class DriverPage extends BaseViewPage implements Navigatable {
         return '/users/drivers'
     }
 
-    async waitForLoadState(): Promise<void> {
-    
-    }
-
+    async waitForLoadState(): Promise<void> {}
 } 
