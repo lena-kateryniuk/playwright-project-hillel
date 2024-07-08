@@ -12,12 +12,10 @@ export class LoginPage extends Base implements Navigatable {
         await this.emeilField.fill(email);
         await this.passwordField.fill(password);
         await this.loginButton.click();
-        
     }
 
     async waitForLoadState() {};
 
-    
     url() {
         return '/login';
     }
