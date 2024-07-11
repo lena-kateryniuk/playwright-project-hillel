@@ -11,8 +11,8 @@ test.describe('API Tests', () => {
 
   test('Correct email and name in me request', async ({ api }) => {
     const { name, email } = await api.get('me')
-    name === 'Test User'; 
-    email === process.env.EMAIL;
+    await expect(name).toBe('Test User'); 
+    await expect(email).toBe(process.env.EMAIL);
   })
 
   test('Correct number of drivers in a table', async ({ page, api }) => {
