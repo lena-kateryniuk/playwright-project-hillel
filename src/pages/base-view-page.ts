@@ -16,3 +16,4 @@ export abstract class BaseViewPage extends Base implements Navigatable {
         return this.pageUrl;
     }
 }
+
