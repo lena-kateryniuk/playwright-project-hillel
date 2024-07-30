@@ -1,16 +1,15 @@
-import { test, expect } from "@playwright/test";
+import { expect } from "@playwright/test";
 import { goto } from "../pages/navigatable";
-import { DriverPage } from "../pages/pages/driver-page";
-import { LoginPage } from "../pages/pages/login-page";
 import { step } from "../helpers/step";
+import { BaseSteps } from "./baseStep";
 
-export class LoginSteps {
+export class LoginSteps extends BaseSteps{
     @step ('Login User')
-    async login(loginPage: LoginPage, driversPage: DriverPage) {
-            await goto(loginPage);
-            await loginPage.login(process.env.EMAIL, process.env.PASSWORD)
-            await loginPage.waitForLoadState();
-            await goto(driversPage);
-            await expect(driversPage.header.userName).toBeVisible(); 
+    async login() {
+            await goto(this.app.loginPage);
+            await this.app.loginPage.login(process.env.EMAIL, process.env.PASSWORD)
+            await this.app.loginPage.waitForLoadState();
+            await goto(this.app.driversPage);
+            await expect(this.app.driversPage.header.userName).toBeVisible(); 
     }
 }

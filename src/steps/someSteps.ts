@@ -1,6 +1,7 @@
 import { step } from "../helpers/step";
+import { BaseSteps } from "./baseStep";
 
-export class SomeSteps {
+export class SomeSteps extends BaseSteps{
     @step ('Some Step 1')
     async someStep1() {
         console.log('Steps 1 for testing typeScript mixins')

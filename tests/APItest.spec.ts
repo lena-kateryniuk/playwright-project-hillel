@@ -1,11 +1,9 @@
 import { expect, test } from '../src/fixtures/base';
 import { goto } from '../src/pages/navigatable';
-import { LoginPage } from '../src/pages/pages/login-page';
-import { TruckPage } from '../src/pages/pages/trucks-page';
 
 test.describe('API Tests', () => {    
-  test.beforeEach(async ({ steps, loginPage, driverPage }) => {
-    await steps.login(loginPage, driverPage);
+  test.beforeEach(async ({ steps }) => {
+    await steps.login();
   })
 
 
@@ -22,15 +20,15 @@ test.describe('API Tests', () => {
     expect(items.length).toBe(driversInTable);
   })
 
-  test('Correct number of trucks in a table', async ({ page, truckPage, api }) => {
-    await goto(truckPage);
+  test('Correct number of trucks in a table', async ({ page, app, api }) => {
+    await goto(app.trucksPage);
     await page.waitForSelector('[class="v-data-table__tr"]');
     const trucksInTable = await page.locator('[class="v-data-table__tr"]').count();
     const { items } = await api.get('trucks');
     expect(items.length).toBe(trucksInTable);
   })
 
-  test('Replace digits with emojis in response Dims & payload', async ({ truckPage, page }) => {
+  test('Replace digits with emojis in response Dims & payload', async ({ app, page }) => {
     const emojiMap = ['😀', '🫠', '😱', '🤤', '🤥', '🥵', '😎', '🤢', '👺', '👽️'];
     
     await page.route('**/api/v1/trucks?*', async route => {
@@ -56,7 +54,7 @@ test.describe('API Tests', () => {
       });
     });
 
-    await goto(truckPage);
+    await goto(app.trucksPage);
     await page.waitForSelector('table');
     await page.screenshot({ path: 'screenshot.png' });
   });
