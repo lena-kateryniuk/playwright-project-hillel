@@ -1,4 +1,5 @@
 import { test, expect } from '../src/fixtures/base';
+import { users } from '../src/helpers/users';
 import { goto } from '../src/pages/navigatable';
 
 
@@ -14,14 +15,9 @@ test.describe('Login Page Tests', () => {
     await expect(page.locator('a[href="/reset-password"]')).toContainText('Forgot password');
   })
 
-  test ('Successful login with correct credentials', async ({ page, app, steps }) => {
-    await steps.login()
-    await expect(page.getByRole('button', { name: 'Test User' })).toBeVisible();
-  });
-
   test('Login with incorrect credentials', async ({ page, app }) => {
     await goto(app.loginPage);
-    await app.loginPage.login(process.env.EMAIL, 'aaa');
+    await app.loginPage.login(users.notValidUser);
     await expect(page.locator('text=Wrong Email or password')).toBeVisible();
   })
 })

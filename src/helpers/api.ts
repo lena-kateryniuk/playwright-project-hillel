@@ -11,6 +11,8 @@ export class API {
     
     async get(name: keyof typeof endpoints){
         const res = await this.request.get(endpoints[name]);
+        console.log(`API response status for ${name}: ${res.status()}`);
+        console.log(`API response body for ${name}: ${await res.text()}`);
         await expect(res).toBeOK();
         return res.json();
     }

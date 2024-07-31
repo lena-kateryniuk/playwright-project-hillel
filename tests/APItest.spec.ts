@@ -1,19 +1,17 @@
-import { expect, test } from '../src/fixtures/base';
+import { expect, test } from '../src/fixtures/autoLogin';
 import { goto } from '../src/pages/navigatable';
 
 test.describe('API Tests', () => {    
-  test.beforeEach(async ({ steps }) => {
-    await steps.login();
-  })
 
-
-  test('Correct email and name in me request', async ({ api }) => {
+  test('Correct email and name in me request', async ({ api, app }) => {
+    await goto(app.driversPage);
     const { name, email } = await api.get('me')
     expect(name).toBe('Test User'); 
-    expect(email).toBe(process.env.EMAIL);
+    expect(email).toBe("test@gmail.com");
   })
 
-  test('Correct number of drivers in a table', async ({ page, api }) => {
+  test('Correct number of drivers in a table', async ({ page, api, app }) => {
+    await goto(app.driversPage);
     await page.waitForSelector('[class="v-data-table__tr"]');
     const driversInTable = await page.locator('[class="v-data-table__tr"]').count();
     const { items } = await api.get('drivers')
